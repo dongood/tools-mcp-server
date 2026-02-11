@@ -70,10 +70,7 @@ export function markdownToAdf(markdown: string): ADFDocument {
 /**
  * Handle markdown tool calls
  */
-export function handleMarkdownTool(
-  name: string,
-  args: Record<string, unknown>
-): string {
+export function handleMarkdownTool(name: string, args: Record<string, unknown>): string {
   switch (name) {
     case "markdown_adf_to_markdown": {
       const adf = args.adf as ADFDocument;

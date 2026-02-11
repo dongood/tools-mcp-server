@@ -2,10 +2,7 @@
 
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types.js";
+import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
 import { markdownTools, handleMarkdownTool } from "./tools/markdown/index.js";
 
@@ -54,7 +51,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 });
 
 // Start the server
-async function main() {
+async function main(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error("Tools MCP server running");
