@@ -8,6 +8,8 @@ An MCP (Model Context Protocol) server that exposes a collection of utility tool
 
 - **ADF to Markdown**: Convert Atlassian Document Format (ADF) to Extended Markdown
 - **Markdown to ADF**: Convert Extended Markdown to Atlassian Document Format
+- **Table Formatting**: Format tables with aligned columns for human readability
+- **TOC Management**: Generate and refresh table of contents based on document headings
 
 Supports all ADF elements including panels, tables, media, mentions, code blocks, and more.
 
@@ -80,10 +82,15 @@ After adding the config, restart Claude Code (`exit` then `claude`).
 
 ### Markdown Collection
 
-| Tool | Description | Parameters |
-| ---- | ----------- | ---------- |
-| `markdown_adf_to_markdown` | Convert ADF JSON to Extended Markdown | `adf` (ADF document object) |
-| `markdown_markdown_to_adf` | Convert Extended Markdown to ADF JSON | `markdown` (string) |
+| Tool                       | Description                                       | Parameters                                                          |
+| -------------------------- | ------------------------------------------------- | ------------------------------------------------------------------- |
+| `markdown_adf_to_markdown` | Convert ADF JSON to Extended Markdown             | `adf` (ADF document object)                                         |
+| `markdown_markdown_to_adf` | Convert Extended Markdown to ADF JSON             | `markdown` (string)                                                 |
+| `markdown_format_tables`   | Format tables with aligned columns                | `markdown` (string)                                                 |
+| `markdown_refresh_toc`     | Refresh existing TOC to match current headings    | `markdown` (string), `minLevel?`, `maxLevel?`                       |
+| `markdown_generate_toc`    | Generate TOC from headings (without inserting)    | `markdown` (string), `minLevel?`, `maxLevel?`                       |
+| `markdown_insert_toc`      | Replace `/toc` markers with generated TOC         | `markdown` (string), `minLevel?`, `maxLevel?`                       |
+| `markdown_format`          | Combined formatting (tables + /toc + TOC refresh) | `markdown` (string), `formatTables?` (bool), `processTOC?` (bool)   |
 
 ## Usage Examples
 
@@ -92,6 +99,9 @@ Once configured, you can ask Claude:
 - "Convert this Confluence ADF to markdown"
 - "Transform this markdown into ADF format for Jira"
 - "Parse this ADF document and give me the markdown equivalent"
+- "Format the tables in this markdown file"
+- "Refresh the table of contents"
+- "Generate a TOC for this document"
 
 ### Example: ADF to Markdown
 
@@ -130,6 +140,76 @@ Returns: `Hello **World**`
 ```
 
 Returns a complete ADF document structure.
+
+### Example: Format Tables
+
+Input:
+```markdown
+| Name | Age | City |
+|---|---|---|
+| Alice | 30 | New York |
+| Bob | 25 | Los Angeles |
+```
+
+Output:
+```markdown
+| Name  | Age | City        |
+| ----- | --- | ----------- |
+| Alice | 30  | New York    |
+| Bob   | 25  | Los Angeles |
+```
+
+### Example: Generate TOC
+
+Input document with headings:
+```markdown
+# Main Title
+## Section 1
+### Subsection 1.1
+## Section 2
+```
+
+Generated TOC:
+```markdown
+- [Main Title](#main-title)
+  - [Section 1](#section-1)
+    - [Subsection 1.1](#subsection-11)
+  - [Section 2](#section-2)
+```
+
+### Example: Insert TOC with /toc Marker
+
+Input:
+```markdown
+# My Document
+
+/toc
+
+## Introduction
+
+Content here...
+
+## Conclusion
+
+Final thoughts.
+```
+
+Output:
+```markdown
+# My Document
+
+- [My Document](#my-document)
+  - [Introduction](#introduction)
+  - [Conclusion](#conclusion)
+
+## Introduction
+
+Content here...
+
+## Conclusion
+
+Final thoughts.
+```
 
 ## Development
 
