@@ -1,0 +1,29 @@
+{
+  "name": "tools-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server exposing a collection of utility tools for AI agents",
+  "type": "module",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsc && node build/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "tools",
+    "adf",
+    "markdown",
+    "atlassian"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "extended-markdown-adf-parser": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
