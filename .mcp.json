@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "tools": {
+    "toolkit": {
       "command": "node",
       "args": ["/Users/dongood/SourceCode/Repos/_dongood/tools-mcp-server/build/index.js"]
     }

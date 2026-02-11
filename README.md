@@ -28,7 +28,7 @@ Add the following to your Claude Desktop configuration file:
 ```json
 {
   "mcpServers": {
-    "tools": {
+    "toolkit": {
       "command": "node",
       "args": ["/absolute/path/to/tools-mcp-server/build/index.js"]
     }
@@ -49,7 +49,7 @@ Edit `~/.claude.json` and add the server under the `mcpServers` key. This makes 
 ```json
 {
   "mcpServers": {
-    "tools": {
+    "toolkit": {
       "type": "stdio",
       "command": "node",
       "args": ["/absolute/path/to/tools-mcp-server/build/index.js"]
@@ -65,7 +65,7 @@ Alternatively, add a `.mcp.json` file to your project root for project-specific 
 ```json
 {
   "mcpServers": {
-    "tools": {
+    "toolkit": {
       "type": "stdio",
       "command": "node",
       "args": ["/absolute/path/to/tools-mcp-server/build/index.js"]

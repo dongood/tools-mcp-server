@@ -12,7 +12,7 @@ const allTools = [...markdownTools];
 // Create MCP server
 const server = new Server(
   {
-    name: "tools-mcp-server",
+    name: "toolkit",
     version: "1.0.0",
   },
   {
@@ -54,7 +54,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Tools MCP server running");
+  console.error("Toolkit MCP server running");
 }
 
 main().catch((error) => {
